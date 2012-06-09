@@ -1633,6 +1633,15 @@ UV_EXTERN void uv_sem_post(uv_sem_t* sem);
 UV_EXTERN void uv_sem_wait(uv_sem_t* sem);
 UV_EXTERN int uv_sem_trywait(uv_sem_t* sem);
 
+/*
+ * Same goes for the condition variable functions.
+ */
+UV_EXTERN int uv_cond_init(uv_cond_t* cv);
+UV_EXTERN void uv_cond_destroy(uv_cond_t* cv);
+UV_EXTERN void uv_cond_wait(uv_cond_t* cv, uv_mutex_t* mutex);
+UV_EXTERN void uv_cond_signal(uv_cond_t* cv);
+UV_EXTERN void uv_cond_broadcast(uv_cond_t* cv);
+
 /* Runs a function once and only once. Concurrent calls to uv_once() with the
  * same guard will block all callers except one (it's unspecified which one).
  * The guard should be initialized statically with the UV_ONCE_INIT macro.

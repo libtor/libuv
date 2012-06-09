@@ -172,6 +172,7 @@ typedef HANDLE uv_thread_t;
 typedef HANDLE uv_sem_t;
 
 typedef CRITICAL_SECTION uv_mutex_t;
+typedef CONDITION_VARIABLE uv_cond_t;
 
 typedef union {
   /* srwlock_ has type SRWLOCK, but not all toolchains define this type in */

@@ -245,6 +245,29 @@ int uv_sem_trywait(uv_sem_t* sem) {
   return -1; /* Satisfy the compiler. */
 }
 
+int uv_cond_init(uv_cond_t* cv) {
+  InitializeConditionVariable(cv);
+  return 0;
+}
+
+void uv_cond_destroy(uv_cond_t* cv) {
+}
+
+void uv_cond_wait(uv_cond_t* cv, uv_mutex_t* mutex) {
+  if (SleepConditionVariableCS(cv, mutex, INFINITE))
+    return 0;
+  else
+    return -1;
+}
+
+void uv_cond_signal(uv_cond_t* cv) {
+  WakeConditionVariable(cv);
+}
+
+void uv_cond_broadcast(uv_cond_t* cv) {
+  WakeAllConditionVariable(cv);
+}
+
 
 inline static int uv__rwlock_srwlock_init(uv_rwlock_t* rwlock) {
   pInitializeSRWLock(&rwlock->srwlock_);
