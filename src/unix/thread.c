@@ -258,3 +258,36 @@ int uv_sem_trywait(uv_sem_t* sem) {
 }
 
 #endif /* defined(__APPLE__) && defined(__MACH__) */
+
+int uv_cond_init(uv_cond_t* cv) {
+#ifdef NDEBUG
+  if (pthread_cond_init(cv, NULL))
+    return -1;
+  else
+    return 0;
+#else
+  if (pthread_cond_init(cv, NULL))
+    abort();
+  return 0;
+#endif
+}
+
+void uv_cond_destroy(uv_cond_t* cv) {
+  if (pthread_cond_destroy(cv))
+    abort();
+}
+
+void uv_cond_wait(uv_cond_t* cv, uv_mutex_t* mutex) {
+  if (pthread_cond_wait(cv, mutex))
+    abort();
+}
+
+void uv_cond_signal(uv_cond_t* cv) {
+  if (pthread_cond_signal(cv))
+    abort();
+}
+
+void uv_cond_broadcast(uv_cond_t* cv) {
+  if (pthread_cond_broadcast(cv))
+    abort();
+}

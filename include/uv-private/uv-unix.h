@@ -99,7 +99,9 @@ typedef pthread_once_t uv_once_t;
 typedef pthread_t uv_thread_t;
 typedef pthread_mutex_t uv_mutex_t;
 typedef pthread_rwlock_t uv_rwlock_t;
+
 typedef UV_PLATFORM_SEM_T uv_sem_t;
+typedef pthread_cond_t uv_cond_t;
 
 /* Platform-specific definitions for uv_spawn support. */
 typedef gid_t uv_gid_t;
